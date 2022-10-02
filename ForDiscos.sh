@@ -15,6 +15,14 @@ mount /dev/sda1 /mnt/boot/efi
 mkdir /mnt/home
 mount /dev/sda4 /mnt/home
 
+pacman -Sy archlinux-keyring
+
+pacstrap /mnt base linux linux-firmware nano grub networkmanager dhcpcd efibootmgr neovim
+
+genfstab -U /mnt >> /mnt/etc/fstab
+
+pacstrap /mnt netctl wpa_supplicant
+
 arch-chroot /mnt
 # zona horaria
 ln -sf /usr/share/zoneinfo/America/Santiago /etc/localtime
